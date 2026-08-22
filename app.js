@@ -1,23 +1,35 @@
 (function () {
   var API = "https://roots-funding.evercaregreenroots.workers.dev";
+  var state = {};
 
   function money(cents) {
-    var s = (cents / 100).toFixed(2).split(".");
+    var s = (Math.round(cents) / 100).toFixed(2).split(".");
     return "$" + s[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "." + s[1];
   }
 
-  function say(article, msg) {
-    var el = article.querySelector(".status");
-    if (el) el.textContent = msg;
+  function say(art, msg) {
+    var el = art.querySelector(".status");
+    if (el) el.textContent = msg || "";
   }
 
-  function buildAmountFields() {
-    document.querySelectorAll("article.item").forEach(function (art) {
-      var actions = art.querySelector(".actions");
-      var btn = art.querySelector("button.give");
-      if (!actions || !btn || art.querySelector("input.amount")) return;
+  function itemsOnPage() {
+    return [].slice.call(document.querySelectorAll("article.item"));
+  }
 
-      var name = art.querySelector("h3") ? art.querySelector("h3").textContent : "this item";
+  function centsIn(input) {
+    var v = parseFloat(input.value);
+    if (!isFinite(v) || v <= 0) return 0;
+    return Math.round(v * 100);
+  }
+
+  function buildFields() {
+    itemsOnPage().forEach(function (art) {
+      var actions = art.querySelector(".actions");
+      if (!actions || art.querySelector("input.amount")) return;
+
+      var h3 = art.querySelector("h3");
+      var name = h3 ? h3.textContent : "this item";
+
       var wrap = document.createElement("span");
       wrap.className = "amtwrap";
 
@@ -32,25 +44,109 @@
       input.min = "1";
       input.step = "1";
       input.inputMode = "decimal";
-      input.placeholder = "25";
       input.setAttribute("aria-label", "Amount in dollars toward " + name);
+
+      var rest = document.createElement("button");
+      rest.type = "button";
+      rest.className = "rest-btn";
+      rest.textContent = "Fund the rest";
 
       wrap.appendChild(sign);
       wrap.appendChild(input);
-      actions.insertBefore(wrap, btn);
+      actions.insertBefore(wrap, actions.firstChild);
+      actions.insertBefore(rest, wrap.nextSibling);
 
-      input.addEventListener("keydown", function (e) {
-        if (e.key === "Enter") { e.preventDefault(); go(art); }
+      input.addEventListener("input", function () {
+        art.removeAttribute("data-err");
+        checkOne(art); updateBasket();
+      });
+      input.addEventListener("blur", function () { checkOne(art); updateBasket(); });
+      rest.addEventListener("click", function () {
+        var it = state[art.getAttribute("data-slug")];
+        if (!it || it.closed) return;
+        art.removeAttribute("data-err");
+        input.value = String(it.remaining / 100);
+        checkOne(art);
+        updateBasket();
+        input.focus();
       });
     });
   }
 
-  function render(data) {
-    var bySlug = {};
-    data.items.forEach(function (i) { bySlug[i.slug] = i; });
+  function checkOne(art) {
+    var it = state[art.getAttribute("data-slug")];
+    var input = art.querySelector("input.amount");
+    if (!it || !input) return true;
 
-    document.querySelectorAll("article.item").forEach(function (art) {
-      var it = bySlug[art.getAttribute("data-slug")];
+    var cents = centsIn(input);
+    if (!cents) {
+      art.removeAttribute("data-err");
+      input.removeAttribute("aria-invalid");
+      say(art, "");
+      return true;
+    }
+    // A refusal that came back from the server outranks anything we can work out
+    // here, and must survive the refresh that follows it.
+    if (art.hasAttribute("data-err")) return false;
+    if (cents > it.remaining) {
+      input.setAttribute("aria-invalid", "true");
+      say(art, "That is more than this needs. " + it.name + " only needs " + money(it.remaining) + ".");
+      return false;
+    }
+    if (cents < 100) {
+      input.setAttribute("aria-invalid", "true");
+      say(art, "The smallest amount for an item is one dollar.");
+      return false;
+    }
+    input.removeAttribute("aria-invalid");
+    say(art, "");
+    return true;
+  }
+
+  function basketLines() {
+    var out = [];
+    itemsOnPage().forEach(function (art) {
+      var input = art.querySelector("input.amount");
+      var slug = art.getAttribute("data-slug");
+      if (!input || input.disabled) return;
+      var cents = centsIn(input);
+      if (cents > 0) out.push({ item: slug, amount: cents });
+    });
+    return out;
+  }
+
+  function updateBasket() {
+    var bar = document.getElementById("basket");
+    if (!bar) return;
+
+    var lines = basketLines();
+    var total = lines.reduce(function (s, l) { return s + l.amount; }, 0);
+    var ok = itemsOnPage().every(checkOne);
+
+    var countEl = bar.querySelector(".basket-count");
+    var totalEl = bar.querySelector(".basket-total");
+    var pay = document.getElementById("basket-pay");
+
+    if (!lines.length) {
+      bar.hidden = true;
+      document.body.classList.remove("has-basket");
+      return;
+    }
+
+    bar.hidden = false;
+    document.body.classList.add("has-basket");
+    countEl.textContent = lines.length === 1 ? "1 item chosen" : lines.length + " items chosen";
+    totalEl.textContent = money(total);
+    pay.disabled = !ok;
+    pay.textContent = ok ? "Contribute " + money(total) : "Fix the amounts above";
+  }
+
+  function render(data) {
+    state = {};
+    data.items.forEach(function (i) { state[i.slug] = i; });
+
+    itemsOnPage().forEach(function (art) {
+      var it = state[art.getAttribute("data-slug")];
       if (!it) return;
 
       var fill = art.querySelector(".fill");
@@ -68,19 +164,19 @@
           (it.closed ? "fully funded" : money(it.remaining) + " still needed"));
       }
 
-      var btn = art.querySelector("button.give");
       var input = art.querySelector("input.amount");
+      var restBtn = art.querySelector(".rest-btn");
       var any = art.querySelector(".any");
 
       if (it.closed) {
         art.setAttribute("data-closed", "yes");
-        if (btn) { btn.disabled = true; btn.textContent = "Fully funded"; }
         if (input) { input.disabled = true; input.value = ""; }
+        if (restBtn) restBtn.disabled = true;
         if (any) any.textContent = "Bought. Thank you.";
       } else {
         art.removeAttribute("data-closed");
-        if (btn) btn.disabled = false;
         if (input) { input.disabled = false; input.max = String(Math.ceil(it.remaining / 100)); }
+        if (restBtn) { restBtn.disabled = false; restBtn.textContent = "Fund the rest, " + money(it.remaining); }
         if (any) any.textContent = "Any amount up to " + money(it.remaining);
       }
     });
@@ -89,6 +185,8 @@
     if (raised) raised.textContent = money(data.total.raised);
     var goalNote = document.querySelector("[data-total-goal]");
     if (goalNote) goalNote.textContent = "Of " + money(data.total.goal) + " listed";
+
+    updateBasket();
   }
 
   function load() {
@@ -101,56 +199,80 @@
       });
   }
 
-  function go(art) {
-    var slug = art.getAttribute("data-slug");
-    var input = art.querySelector("input.amount");
-    var btn = art.querySelector("button.give");
-    var dollars = parseFloat(input ? input.value : "");
+  function barSay(msg) {
+    var el = document.querySelector(".basket-status");
+    if (el) el.textContent = msg || "";
+  }
 
-    if (!(dollars >= 1)) {
-      say(art, "Enter an amount of at least one dollar, then press the button again.");
-      if (input) input.focus();
-      return;
-    }
+  function pay() {
+    var lines = basketLines();
+    if (!lines.length) return;
 
-    if (btn) btn.disabled = true;
-    say(art, "Opening secure checkout.");
+    var btn = document.getElementById("basket-pay");
+    btn.disabled = true;
+    barSay("Opening secure checkout.");
 
     fetch(API + "/checkout", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ item: slug, amount: Math.round(dollars * 100) })
+      body: JSON.stringify({ items: lines })
     })
       .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, body: j }; }); })
       .then(function (res) {
-        if (!res.ok || !res.body.url) {
-          if (btn) btn.disabled = false;
-          say(art, res.body.message || res.body.error || "Checkout could not be started. Please try again.");
+        if (res.ok && res.body.url) { window.location.href = res.body.url; return; }
+        btn.disabled = false;
+
+        if (res.body && res.body.error === "check" && res.body.rejected) {
+          res.body.rejected.forEach(function (bad) {
+            var art = document.querySelector('article.item[data-slug="' + bad.item + '"]');
+            if (!art) return;
+            var input = art.querySelector("input.amount");
+            if (input) input.setAttribute("aria-invalid", "true");
+            art.setAttribute("data-err", "1");
+            if (bad.reason === "closed") say(art, bad.name + " finished funding while you were choosing. Clear this amount and the rest will go through.");
+            else if (bad.reason === "over") say(art, bad.name + " only needs " + money(bad.remaining) + " now. Lower this amount and try again.");
+            else say(art, "The smallest amount for an item is one dollar.");
+          });
+          barSay("Some amounts need changing before this can go through. They are marked above.");
           load();
           return;
         }
-        window.location.href = res.body.url;
+        barSay((res.body && (res.body.message || res.body.error)) || "Checkout could not be started. Please try again.");
       })
       .catch(function () {
-        if (btn) btn.disabled = false;
-        say(art, "Could not reach the payment service. Please try again in a moment.");
+        btn.disabled = false;
+        barSay("Could not reach the payment service. Please try again in a moment.");
       });
   }
 
-  function thankYou() {
-    var m = window.location.search.match(/[?&]funded=([a-z0-9-]+)/);
-    if (!m) return;
-    var art = document.querySelector('article.item[data-slug="' + m[1] + '"]');
-    if (art) {
-      say(art, "Thank you. Your contribution is recorded and the total below now includes it.");
-      art.scrollIntoView({ block: "center" });
-    }
+  function clearAll() {
+    itemsOnPage().forEach(function (art) {
+      var input = art.querySelector("input.amount");
+      if (input) { input.value = ""; input.removeAttribute("aria-invalid"); }
+      art.removeAttribute("data-err");
+      say(art, "");
+    });
+    barSay("");
+    updateBasket();
   }
 
-  buildAmountFields();
-  document.querySelectorAll("button.give").forEach(function (btn) {
-    btn.addEventListener("click", function () { go(btn.closest("article.item")); });
-  });
+  function thankYou() {
+    if (!/[?&]funded=/.test(window.location.search)) return;
+    var head = document.getElementById("manifest-h");
+    if (!head) return;
+    var p = document.createElement("p");
+    p.className = "thanks";
+    p.setAttribute("role", "status");
+    p.textContent = "Thank you. Your contribution is recorded, and the amounts below already include it.";
+    head.parentNode.insertBefore(p, head.nextSibling);
+  }
+
+  buildFields();
+  var payBtn = document.getElementById("basket-pay");
+  var clearBtn = document.getElementById("basket-clear");
+  if (payBtn) payBtn.addEventListener("click", pay);
+  if (clearBtn) clearBtn.addEventListener("click", clearAll);
+
   load().then(thankYou);
   setInterval(load, 45000);
 })();
