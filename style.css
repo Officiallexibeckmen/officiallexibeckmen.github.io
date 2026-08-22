@@ -42,9 +42,9 @@ a:hover{color:var(--accent-hover);}
 .topbar{border-bottom:1px solid var(--rule);background:var(--surface-2);}
 .topbar-inner{max-width:940px;margin:0 auto;padding:14px 24px;display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center;justify-content:space-between;}
 .brandline{display:flex;align-items:center;gap:12px;}
-.logoslot{width:38px;height:38px;flex:0 0 auto;border:1px dashed var(--rule-strong);border-radius:2px;
-  display:flex;align-items:center;justify-content:center;font-family:"IBM Plex Mono",monospace;
-  font-size:8.5px;line-height:1.1;color:var(--ink-3);text-align:center;letter-spacing:.04em;}
+.logoslot{width:48px;height:48px;flex:0 0 auto;border:0;border-radius:50%;overflow:hidden;
+  background:#F7EFE7 url("logo.png") no-repeat center/40px 40px;
+  font-size:0;color:transparent;}
 .brandname{font-family:Newsreader,Georgia,serif;font-size:1.12rem;font-weight:600;letter-spacing:-.005em;text-decoration:none;color:var(--ink);}
 .brandname:hover{color:var(--accent);}
 nav ul{list-style:none;display:flex;flex-wrap:wrap;gap:22px;margin:0;padding:0;font-size:15px;}
@@ -138,6 +138,9 @@ input.amount:disabled{color:var(--ink-3);}
 button.give:disabled{background:var(--surface-2);color:var(--ink-3);border-color:var(--rule-strong);cursor:default;}
 button.give:disabled:hover{background:var(--surface-2);border-color:var(--rule-strong);}
 article.item[data-closed] .track{opacity:.75;}
+.eventmark{width:124px;height:125px;margin:0 0 22px;border-radius:50%;overflow:hidden;
+  background:#FBFBF6 url("bids-logo.png") no-repeat center/116px 117px;}
+@media (max-width:600px){.eventmark{width:104px;height:105px;background-size:98px 99px;}}
 .rest-btn{font-family:"Public Sans",sans-serif;font-size:14.5px;font-weight:600;background:transparent;color:var(--accent);
   border:1px solid var(--rule-strong);padding:10px 16px;border-radius:3px;cursor:pointer;}
 .rest-btn:hover:not(:disabled){background:var(--accent-soft);border-color:var(--accent);}
