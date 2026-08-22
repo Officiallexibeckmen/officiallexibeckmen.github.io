@@ -1,0 +1,599 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body>
+<title>Winter Supply Manifest</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<style>
+  :root{
+    --paper:#EFF2F1;
+    --surface:#FFFFFF;
+    --surface-2:#F7F9F8;
+    --ink:#101C18;
+    --ink-2:#55655E;
+    --ink-3:#5F6E68;
+    --rule:#D3DBD8;
+    --rule-strong:#B9C5C0;
+    --accent:#165C48;
+    --accent-hover:#0F4536;
+    --accent-soft:#DCE8E3;
+    --accent-ink:#FFFFFF;
+    --notice:#FDF6E3;
+    --notice-rule:#E4D5A8;
+    --notice-ink:#5B4A16;
+    --shadow:0 1px 2px rgba(16,28,24,.06), 0 4px 16px rgba(16,28,24,.05);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#0C120F;
+      --surface:#141C18;
+      --surface-2:#111815;
+      --ink:#E3EAE6;
+      --ink-2:#98A8A1;
+      --ink-3:#7A8A83;
+      --rule:#26332D;
+      --rule-strong:#33443C;
+      --accent:#4FB894;
+      --accent-hover:#6BCFAC;
+      --accent-soft:#1B2C25;
+      --accent-ink:#08120E;
+      --notice:#221D0E;
+      --notice-rule:#4A3F1C;
+      --notice-ink:#E0CE97;
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 4px 16px rgba(0,0,0,.3);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#0C120F;
+    --surface:#141C18;
+    --surface-2:#111815;
+    --ink:#E3EAE6;
+    --ink-2:#98A8A1;
+    --ink-3:#7A8A83;
+    --rule:#26332D;
+    --rule-strong:#33443C;
+    --accent:#4FB894;
+    --accent-hover:#6BCFAC;
+    --accent-soft:#1B2C25;
+    --accent-ink:#08120E;
+    --notice:#221D0E;
+    --notice-rule:#4A3F1C;
+    --notice-ink:#E0CE97;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 4px 16px rgba(0,0,0,.3);
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:940px;margin:0 auto;padding:0 24px 96px;}
+
+  a{color:var(--accent);text-underline-offset:3px;text-decoration-thickness:1px;}
+  a:hover{color:var(--accent-hover);}
+  :focus-visible{outline:2.5px solid var(--accent);outline-offset:3px;border-radius:2px;}
+
+  .skip{position:absolute;left:-9999px;top:0;background:var(--surface);color:var(--ink);padding:12px 18px;z-index:20;border:1px solid var(--rule);}
+  .skip:focus{left:12px;top:12px;}
+
+  .num{font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;font-variant-numeric:tabular-nums;}
+
+  /* ---- preview strip ---- */
+  .preview{
+    background:var(--notice);
+    border-bottom:1px solid var(--notice-rule);
+    color:var(--notice-ink);
+    font-size:14.5px;
+    line-height:1.5;
+  }
+  .preview p{max-width:940px;margin:0 auto;padding:12px 24px;}
+  .preview strong{font-weight:700;}
+
+  /* ---- top bar ---- */
+  .topbar{border-bottom:1px solid var(--rule);background:var(--surface);}
+  .topbar-inner{max-width:940px;margin:0 auto;padding:14px 24px;display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center;justify-content:space-between;}
+  .brandline{display:flex;align-items:center;gap:12px;}
+  .logoslot{
+    width:38px;height:38px;flex:0 0 auto;
+    border:1px dashed var(--rule-strong);border-radius:2px;
+    display:flex;align-items:center;justify-content:center;
+    font-family:"IBM Plex Mono",monospace;font-size:8.5px;line-height:1.1;
+    color:var(--ink-3);text-align:center;letter-spacing:.04em;
+  }
+  .brandname{font-family:Newsreader,Georgia,serif;font-size:1.12rem;font-weight:600;letter-spacing:-.005em;text-decoration:none;color:var(--ink);}
+  .brandname:hover{color:var(--accent);}
+  .backlink{font-size:15px;font-weight:500;color:var(--ink-2);text-decoration:none;}
+  .backlink:hover{color:var(--accent);}
+
+  /* ---- masthead ---- */
+  header.masthead{border-bottom:1px solid var(--rule-strong);}
+  .masthead-inner{max-width:940px;margin:0 auto;padding:56px 24px 32px;}
+  .org{
+    font-family:"IBM Plex Mono",monospace;
+    font-size:12.5px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--ink-2);
+    margin:0 0 20px;
+  }
+  h1{
+    font-family:Newsreader,Georgia,"Times New Roman",serif;
+    font-weight:500;
+    font-size:clamp(2.3rem,5.2vw,3.5rem);
+    line-height:1.08;
+    letter-spacing:-.015em;
+    margin:0 0 20px;
+    text-wrap:balance;
+  }
+  .standfirst{
+    font-size:19px;
+    line-height:1.62;
+    color:var(--ink-2);
+    max-width:62ch;
+    margin:0;
+  }
+
+  /* ---- summary band ---- */
+  .band{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:1px;
+    background:var(--rule);
+    border:1px solid var(--rule);
+    margin:40px 0 0;
+  }
+  .band > div{background:var(--surface);padding:20px 22px;}
+  .band dt{
+    font-family:"IBM Plex Mono",monospace;
+    font-size:11.5px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--ink-3);
+    margin:0 0 8px;
+  }
+  .band dd{
+    margin:0;
+    font-family:"IBM Plex Mono",monospace;
+    font-variant-numeric:tabular-nums;
+    font-size:26px;
+    font-weight:500;
+    line-height:1.15;
+    letter-spacing:-.02em;
+  }
+  .band dd small{display:block;font-size:13px;font-weight:400;color:var(--ink-2);letter-spacing:0;margin-top:6px;font-family:"Public Sans",sans-serif;}
+
+  /* ---- sections ---- */
+  section{margin-top:64px;}
+  h2{
+    font-family:Newsreader,Georgia,serif;
+    font-weight:500;
+    font-size:1.85rem;
+    letter-spacing:-.01em;
+    margin:0 0 8px;
+    text-wrap:balance;
+  }
+  .sec-note{color:var(--ink-2);margin:0 0 28px;max-width:64ch;font-size:16.5px;}
+
+  /* ---- bag contents ---- */
+  .contents{
+    list-style:none;
+    margin:0;
+    padding:0;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:1px;
+    background:var(--rule);
+    border:1px solid var(--rule);
+  }
+  .contents li{background:var(--surface);padding:16px 18px;display:flex;gap:14px;align-items:baseline;}
+  .contents .qty{
+    font-family:"IBM Plex Mono",monospace;
+    font-variant-numeric:tabular-nums;
+    font-weight:600;
+    color:var(--accent);
+    font-size:15px;
+    flex:0 0 auto;
+    min-width:2.2em;
+  }
+  .contents .what{font-size:15.5px;line-height:1.45;}
+
+  /* ---- manifest ---- */
+  .manifest{display:flex;flex-direction:column;gap:14px;}
+  article.item{
+    background:var(--surface);
+    border:1px solid var(--rule);
+    box-shadow:var(--shadow);
+    padding:24px 26px 22px;
+  }
+  .item-head{display:flex;flex-wrap:wrap;gap:8px 20px;align-items:baseline;justify-content:space-between;}
+  h3{
+    font-family:Newsreader,Georgia,serif;
+    font-weight:600;
+    font-size:1.32rem;
+    letter-spacing:-.005em;
+    margin:0;
+    line-height:1.25;
+  }
+  .goal{
+    font-family:"IBM Plex Mono",monospace;
+    font-variant-numeric:tabular-nums;
+    font-size:1.2rem;
+    font-weight:500;
+    white-space:nowrap;
+  }
+  .spec{
+    font-family:"IBM Plex Mono",monospace;
+    font-size:13.5px;
+    line-height:1.65;
+    color:var(--ink-2);
+    margin:12px 0 0;
+  }
+  .verify{margin:10px 0 0;font-size:14px;color:var(--ink-2);}
+
+  /* meter */
+  .meter{margin:20px 0 0;}
+  .track{
+    height:10px;
+    background:var(--accent-soft);
+    border-radius:5px;
+    overflow:hidden;
+  }
+  .fill{
+    height:100%;
+    background:var(--accent);
+    border-radius:5px;
+    width:0%;
+    min-width:0;
+    transition:width .9s cubic-bezier(.22,.8,.3,1);
+  }
+  @media (prefers-reduced-motion: reduce){ .fill{transition:none;} }
+  .meter-label{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px 16px;
+    justify-content:space-between;
+    margin-top:10px;
+    font-family:"IBM Plex Mono",monospace;
+    font-variant-numeric:tabular-nums;
+    font-size:13.5px;
+    color:var(--ink-2);
+  }
+  .meter-label .pct{color:var(--ink);font-weight:500;}
+
+  .actions{margin-top:20px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;}
+  button.give{
+    font-family:"Public Sans",sans-serif;
+    font-size:15.5px;
+    font-weight:600;
+    background:var(--accent);
+    color:var(--accent-ink);
+    border:1px solid var(--accent);
+    padding:11px 22px;
+    border-radius:3px;
+    cursor:pointer;
+    transition:background .15s ease;
+  }
+  button.give:hover{background:var(--accent-hover);border-color:var(--accent-hover);}
+  .any{font-size:14.5px;color:var(--ink-2);}
+
+  .status{
+    margin-top:12px;
+    font-size:14.5px;
+    color:var(--notice-ink);
+    background:var(--notice);
+    border:1px solid var(--notice-rule);
+    padding:9px 14px;
+    border-radius:3px;
+  }
+  .status:empty{display:none;}
+
+  /* ---- money ---- */
+  .money{
+    background:var(--surface);
+    border:1px solid var(--rule);
+    padding:26px 28px;
+  }
+  .money ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:16px;}
+  .money li{display:flex;gap:16px;align-items:flex-start;}
+  .money .k{
+    font-family:"IBM Plex Mono",monospace;
+    font-size:12px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--ink-3);
+    flex:0 0 96px;
+    padding-top:4px;
+  }
+  .money .v{flex:1;font-size:16px;line-height:1.6;}
+
+  /* ---- disclosure ---- */
+  .disclosure{
+    border-left:3px solid var(--accent);
+    background:var(--surface-2);
+    padding:22px 26px;
+  }
+  .disclosure p{margin:0 0 14px;font-size:16px;line-height:1.62;}
+  .disclosure p:last-child{margin-bottom:0;}
+
+  footer{
+    margin-top:72px;
+    padding-top:26px;
+    border-top:1px solid var(--rule);
+    color:var(--ink-3);
+    font-size:14.5px;
+  }
+  footer p{margin:0 0 6px;}
+
+  @media (max-width:600px){
+    body{font-size:16.5px;}
+    .masthead-inner{padding:36px 20px 26px;}
+    .wrap{padding:0 20px 72px;}
+    article.item{padding:20px 20px 18px;}
+    .money .k{flex-basis:100%;padding-top:0;}
+    .money li{flex-direction:column;gap:4px;}
+  }
+</style>
+
+<a class="skip" href="#manifest">Skip to the item list</a>
+
+<div class="preview">
+  <p><strong>Draft for review.</strong> The items and prices are real. Already known, no need to report: the contribute buttons don't take money yet, every bar reads 0% because nothing has launched, and the logo isn't in. <strong>Worth reporting:</strong> anything that looks broken or cut off, and whether it's obvious what each item is and how much it still needs.</p>
+</div>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brandline">
+      <div class="logoslot" aria-hidden="true">LOGO<br>HERE</div>
+      <a class="brandname" href="index.html">Roots Worth Tending</a>
+    </div>
+    <a class="backlink" href="index.html">&larr; All campaigns</a>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <p class="org">Winter bags 2026 &middot; Snohomish County, Washington</p>
+    <h1>96 winter bags, itemized down to the unit price.</h1>
+    <p class="standfirst">We buy in bulk and hand out finished bags to unhoused neighbors before the wet months set in. Every line below is a real case of goods from a real supplier, at a price you can check yourself. Pick the one you want to pay for — all of it, or part of it.</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <dl class="band">
+    <div>
+      <dt>Bags assembled</dt>
+      <dd class="num">96<small>Each one identical</small></dd>
+    </div>
+    <div>
+      <dt>Items sourced</dt>
+      <dd class="num">7<small>Of about 40 planned</small></dd>
+    </div>
+    <div>
+      <dt>Raised so far</dt>
+      <dd class="num">$0.00<small>Of $1,819.14 listed</small></dd>
+    </div>
+  </dl>
+
+  <section aria-labelledby="contents-h">
+    <h2 id="contents-h">What goes in a bag</h2>
+    <p class="sec-note">The count on every line below divides evenly into 96 bags. That's the whole constraint — an item earns its place by being something a person can carry, use, and replace.</p>
+    <ul class="contents">
+      <li><span class="qty num">1</span><span class="what">17&nbsp;inch backpack, three pockets</span></li>
+      <li><span class="qty num">3</span><span class="what">Pairs insulated thermal boot socks</span></li>
+      <li><span class="qty num">1</span><span class="what">Zinc oxide barrier cream, 2&nbsp;oz</span></li>
+      <li><span class="qty num">2</span><span class="what">Clotrimazole antifungal cream, 1&nbsp;oz</span></li>
+      <li><span class="qty num">1</span><span class="what">Moleskin blister pads, 6 patches</span></li>
+      <li><span class="qty num">1</span><span class="what">Toothbrush and snap-on head case</span></li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="manifest-h" id="manifest">
+    <h2 id="manifest-h">The manifest</h2>
+    <p class="sec-note">Each item is one bulk order, bought whole. Contribute any amount toward the one you care about — nothing is held back until an item reaches its full price, and nothing is bought until it does.</p>
+
+    <div class="manifest">
+
+      <article class="item">
+        <div class="item-head">
+          <h3>96 backpacks, 17 inch</h3>
+          <span class="goal num">$388.26</span>
+        </div>
+        <p class="spec">4 cases of 24 &rarr; 96 bags &middot; $3.65 each<br>Main pocket, two front zips, side mesh</p>
+        <p class="verify"><a href="https://bagsinbulk.com/collections/wholesale-backpacks/products/17-inch-double-front-zippered-pocket-backpack" target="_blank" rel="noopener">Check this price at the supplier</a></p>
+        <div class="meter">
+          <div class="track"><div class="fill" data-pct="0"></div></div>
+          <div class="meter-label" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="0 dollars of 388 dollars 26 cents funded, 0 percent" aria-label="Funding progress for 96 backpacks">
+            <span class="pct">0% funded</span><span>$388.26 still needed</span>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="give" type="button" data-item="96 backpacks">Contribute to the backpacks</button>
+          <span class="any">Any amount</span>
+        </div>
+        <p class="status" role="status"></p>
+      </article>
+
+      <article class="item">
+        <div class="item-head">
+          <h3>300 pairs thermal boot socks</h3>
+          <span class="goal num">$422.16</span>
+        </div>
+        <p class="spec">3 pairs per bag &times; 96 &rarr; 300 pairs<br>Insulated boot sock, size 10&ndash;13, 80/15/5 cotton blend</p>
+        <p class="verify"><a href="https://www.wholesalesockdeals.com/180-wholesale-yacht-smith-men-s-cotton-assorted-thermal-socks-size-10-13/p-1288229.asp" target="_blank" rel="noopener">Check this price at the supplier</a></p>
+        <div class="meter">
+          <div class="track"><div class="fill" data-pct="0"></div></div>
+          <div class="meter-label" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="0 dollars of 422 dollars 16 cents funded, 0 percent" aria-label="Funding progress for 300 pairs thermal boot socks">
+            <span class="pct">0% funded</span><span>$422.16 still needed</span>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="give" type="button" data-item="300 pairs thermal boot socks">Contribute to the socks</button>
+          <span class="any">Any amount</span>
+        </div>
+        <p class="status" role="status"></p>
+      </article>
+
+      <article class="item">
+        <div class="item-head">
+          <h3>96 packs moleskin blister pads</h3>
+          <span class="goal num">$516.96</span>
+        </div>
+        <p class="spec">96 packs &times; 6 pre-cut 2&times;3 patches &rarr; 576 pads &middot; $4.86 per pack</p>
+        <p class="verify"><a href="https://firstaidsuppliesonline.com/first-aid-products/tapes-wraps-dressing/dressings/moleskin-patches-2-x-3-6-bag/" target="_blank" rel="noopener">Check this price at the supplier</a></p>
+        <div class="meter">
+          <div class="track"><div class="fill" data-pct="0"></div></div>
+          <div class="meter-label" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="0 dollars of 516 dollars 96 cents funded, 0 percent" aria-label="Funding progress for 96 packs moleskin blister pads">
+            <span class="pct">0% funded</span><span>$516.96 still needed</span>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="give" type="button" data-item="96 packs moleskin blister pads">Contribute to the blister pads</button>
+          <span class="any">Any amount</span>
+        </div>
+        <p class="status" role="status"></p>
+      </article>
+
+      <article class="item">
+        <div class="item-head">
+          <h3>192 tubes antifungal cream</h3>
+          <span class="goal num">$296.84</span>
+        </div>
+        <p class="spec">8 cases of 24 &rarr; 192 tubes &middot; $1.20 each<br>Clotrimazole 1%, 1 oz tubes &mdash; two per bag</p>
+        <p class="verify"><a href="https://www.dollaritemdirect.com/drs-pharmacy-clotrimazole-antifungal-cream-1oz-0-900011.aspx" target="_blank" rel="noopener">Check this price at the supplier</a></p>
+        <div class="meter">
+          <div class="track"><div class="fill" data-pct="0"></div></div>
+          <div class="meter-label" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="0 dollars of 296 dollars 84 cents funded, 0 percent" aria-label="Funding progress for 192 tubes antifungal cream">
+            <span class="pct">0% funded</span><span>$296.84 still needed</span>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="give" type="button" data-item="192 tubes antifungal cream">Contribute to the antifungal cream</button>
+          <span class="any">Any amount</span>
+        </div>
+        <p class="status" role="status"></p>
+      </article>
+
+      <article class="item">
+        <div class="item-head">
+          <h3>96 tubes zinc oxide barrier cream</h3>
+          <span class="goal num">$168.32</span>
+        </div>
+        <p class="spec">8 cases of 12 &rarr; 96 tubes &middot; $1.42 each<br>2 oz, 20% zinc oxide, 78% petrolatum skin protectant</p>
+        <p class="verify"><a href="https://harmonycr.com/curad-CUR009814-zinc-oxide-cream/" target="_blank" rel="noopener">Check this price at the supplier</a></p>
+        <div class="meter">
+          <div class="track"><div class="fill" data-pct="0"></div></div>
+          <div class="meter-label" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="0 dollars of 168 dollars 32 cents funded, 0 percent" aria-label="Funding progress for 96 tubes zinc oxide barrier cream">
+            <span class="pct">0% funded</span><span>$168.32 still needed</span>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="give" type="button" data-item="96 tubes zinc oxide barrier cream">Contribute to the barrier cream</button>
+          <span class="any">Any amount</span>
+        </div>
+        <p class="status" role="status"></p>
+      </article>
+
+      <article class="item">
+        <div class="item-head">
+          <h3>100 toothbrushes</h3>
+          <span class="goal num">$16.07</span>
+        </div>
+        <p class="spec">1 case of 100 &middot; $0.12 each<br>Individually wrapped, soft bristle, 6 in</p>
+        <p class="verify"><a href="https://bagsinbulk.com/products/toothbrush-5-color" target="_blank" rel="noopener">Check this price at the supplier</a></p>
+        <div class="meter">
+          <div class="track"><div class="fill" data-pct="0"></div></div>
+          <div class="meter-label" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="0 dollars of 16 dollars 7 cents funded, 0 percent" aria-label="Funding progress for 100 toothbrushes">
+            <span class="pct">0% funded</span><span>$16.07 still needed</span>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="give" type="button" data-item="100 toothbrushes">Contribute to the toothbrushes</button>
+          <span class="any">Any amount</span>
+        </div>
+        <p class="status" role="status"></p>
+      </article>
+
+      <article class="item">
+        <div class="item-head">
+          <h3>100 toothbrush head cases</h3>
+          <span class="goal num">$10.53</span>
+        </div>
+        <p class="spec">2 cases of 50 &rarr; 100 cases &middot; $0.07 each<br>Hinged clamshell, snaps over the bristle head</p>
+        <p class="verify"><a href="https://bagsinbulk.com/products/toothbrush-cap" target="_blank" rel="noopener">Check this price at the supplier</a></p>
+        <div class="meter">
+          <div class="track"><div class="fill" data-pct="0"></div></div>
+          <div class="meter-label" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="0 dollars of 10 dollars 53 cents funded, 0 percent" aria-label="Funding progress for 100 toothbrush head cases">
+            <span class="pct">0% funded</span><span>$10.53 still needed</span>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="give" type="button" data-item="100 toothbrush head cases">Contribute to the head cases</button>
+          <span class="any">Any amount</span>
+        </div>
+        <p class="status" role="status"></p>
+      </article>
+
+    </div>
+  </section>
+
+  <section aria-labelledby="money-h">
+    <h2 id="money-h">Where the money goes</h2>
+    <p class="sec-note">Short version: to the item you picked, and nothing else.</p>
+    <div class="money">
+      <ul>
+        <li><span class="k">Goods</span><span class="v">The listed price is the real case price from the supplier, plus card processing, plus shipping where shipping isn't free. Nothing is padded on top.</span></li>
+        <li><span class="k">Overhead</span><span class="v">None. Nobody is paid, there is no office, and no part of a contribution covers admin.</span></li>
+        <li><span class="k">Timing</span><span class="v">An item is ordered once it's fully funded, and items are bought in the order they're listed, working down from the top. Partial funding sits against its item and waits.</span></li>
+        <li><span class="k">Overshoot</span><span class="v">An item stops accepting money the moment it's paid for, so overshooting is only possible in the seconds when two people are checking out at once. If it happens, the extra moves to the next unfunded item down the list — or you can ask for it back. You choose which at checkout, so nobody has to chase you about it afterward.</span></li>
+        <li><span class="k">Delivery</span><span class="v">Cases ship to a storage unit in Everett, get sorted into 96 identical bags, and go out by hand.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section aria-labelledby="honest-h">
+    <h2 id="honest-h">Things worth knowing before you give</h2>
+    <div class="disclosure">
+      <p><strong>Roots Worth Tending is not a registered 501(c)(3).</strong> It's a small volunteer effort, not an incorporated charity. Your contribution is <strong>not tax-deductible</strong>, and you shouldn't claim it as one.</p>
+      <p>That's also why every line above names its supplier and links to the exact product page. You don't have to take the arithmetic on faith — the case size, the unit price, and the total are all checkable in about thirty seconds, and if a supplier's price has moved since this page was built, the link will show you that too.</p>
+      <p>If something here doesn't add up, say so and it gets fixed.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>Roots Worth Tending &middot; Snohomish County, Washington</p>
+    <p>Bulk supply run for winter <span class="num">2026</span>. Prices verified at the time of listing.</p>
+  </footer>
+
+</div>
+
+<script>
+  (function(){
+    var fills = document.querySelectorAll('.fill');
+    requestAnimationFrame(function(){
+      fills.forEach(function(f){ f.style.width = (f.dataset.pct || 0) + '%'; });
+    });
+
+    document.querySelectorAll('button.give').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var card = btn.closest('.item');
+        var status = card.querySelector('.status');
+        status.textContent = 'Checkout isn’t connected in this preview. On the live page this opens a secure Stripe checkout for the ' + btn.dataset.item + ', where you choose the amount.';
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>
