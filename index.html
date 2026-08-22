@@ -3,167 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-</head>
-<body>
 <title>Roots Worth Tending</title>
+<meta name="description" content="Community support in Snohomish County, Washington. Supply drives and benefit events, itemized in public down to the unit price.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-<style>
-  :root{
-    --paper:#EFF2F1; --surface:#FFFFFF; --surface-2:#F7F9F8;
-    --ink:#101C18; --ink-2:#55655E; --ink-3:#5F6E68;
-    --rule:#D3DBD8; --rule-strong:#B9C5C0;
-    --accent:#165C48; --accent-hover:#0F4536; --accent-soft:#DCE8E3; --accent-ink:#FFFFFF;
-    --notice:#FDF6E3; --notice-rule:#E4D5A8; --notice-ink:#5B4A16;
-    --shadow:0 1px 2px rgba(16,28,24,.06), 0 4px 16px rgba(16,28,24,.05);
-  }
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){
-      --paper:#0C120F; --surface:#141C18; --surface-2:#111815;
-      --ink:#E3EAE6; --ink-2:#98A8A1; --ink-3:#7A8A83;
-      --rule:#26332D; --rule-strong:#33443C;
-      --accent:#4FB894; --accent-hover:#6BCFAC; --accent-soft:#1B2C25; --accent-ink:#08120E;
-      --notice:#221D0E; --notice-rule:#4A3F1C; --notice-ink:#E0CE97;
-      --shadow:0 1px 2px rgba(0,0,0,.4), 0 4px 16px rgba(0,0,0,.3);
-    }
-  }
-  :root[data-theme="dark"]{
-    --paper:#0C120F; --surface:#141C18; --surface-2:#111815;
-    --ink:#E3EAE6; --ink-2:#98A8A1; --ink-3:#7A8A83;
-    --rule:#26332D; --rule-strong:#33443C;
-    --accent:#4FB894; --accent-hover:#6BCFAC; --accent-soft:#1B2C25; --accent-ink:#08120E;
-    --notice:#221D0E; --notice-rule:#4A3F1C; --notice-ink:#E0CE97;
-    --shadow:0 1px 2px rgba(0,0,0,.4), 0 4px 16px rgba(0,0,0,.3);
-  }
-
-  *{box-sizing:border-box;}
-  body{
-    margin:0; background:var(--paper); color:var(--ink);
-    font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;
-    font-size:17px; line-height:1.6; -webkit-font-smoothing:antialiased;
-  }
-  .wrap{max-width:940px;margin:0 auto;padding:0 24px 96px;}
-  a{color:var(--accent);text-underline-offset:3px;text-decoration-thickness:1px;}
-  a:hover{color:var(--accent-hover);}
-  :focus-visible{outline:2.5px solid var(--accent);outline-offset:3px;border-radius:2px;}
-  .skip{position:absolute;left:-9999px;top:0;background:var(--surface);color:var(--ink);padding:12px 18px;z-index:20;border:1px solid var(--rule);}
-  .skip:focus{left:12px;top:12px;}
-  .num{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-variant-numeric:tabular-nums;}
-
-  .preview{background:var(--notice);border-bottom:1px solid var(--notice-rule);color:var(--notice-ink);font-size:14.5px;line-height:1.5;}
-  .preview p{max-width:940px;margin:0 auto;padding:12px 24px;}
-
-  .topbar{border-bottom:1px solid var(--rule);background:var(--surface);}
-  .topbar-inner{max-width:940px;margin:0 auto;padding:14px 24px;display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center;justify-content:space-between;}
-  .brandline{display:flex;align-items:center;gap:12px;}
-  .logoslot{
-    width:38px;height:38px;flex:0 0 auto;
-    border:1px dashed var(--rule-strong);border-radius:2px;
-    display:flex;align-items:center;justify-content:center;
-    font-family:"IBM Plex Mono",monospace;font-size:8.5px;line-height:1.1;
-    color:var(--ink-3);text-align:center;letter-spacing:.04em;
-  }
-  .brandname{font-family:Newsreader,Georgia,serif;font-size:1.12rem;font-weight:600;letter-spacing:-.005em;}
-  nav ul{list-style:none;display:flex;flex-wrap:wrap;gap:22px;margin:0;padding:0;font-size:15px;}
-  nav a{text-decoration:none;color:var(--ink-2);font-weight:500;}
-  nav a:hover,nav a[aria-current]{color:var(--accent);}
-
-  /* hero */
-  header.hero{border-bottom:1px solid var(--rule-strong);background:var(--surface);}
-  .hero-inner{max-width:940px;margin:0 auto;padding:66px 24px 48px;}
-  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2);margin:0 0 24px;}
-  h1{
-    font-family:Newsreader,Georgia,serif;font-weight:500;font-style:italic;
-    font-size:clamp(2.4rem,5.6vw,3.7rem);line-height:1.06;letter-spacing:-.018em;
-    margin:0 0 26px;text-wrap:balance;max-width:20ch;
-  }
-  .origin{font-size:18.5px;line-height:1.66;color:var(--ink-2);max-width:60ch;margin:0 0 18px;}
-  .origin strong{color:var(--ink);font-weight:600;}
-  .origin-note{
-    font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--ink-3);
-    margin:26px 0 0;padding-top:18px;border-top:1px solid var(--rule);
-  }
-
-  section{margin-top:68px;}
-  h2{font-family:Newsreader,Georgia,serif;font-weight:500;font-size:1.9rem;letter-spacing:-.01em;margin:0 0 10px;text-wrap:balance;}
-  .sec-note{color:var(--ink-2);margin:0 0 28px;max-width:64ch;font-size:16.5px;}
-
-  .campaign{background:var(--surface);border:1px solid var(--rule);box-shadow:var(--shadow);padding:30px 32px;}
-  .status-chip{
-    display:inline-flex;align-items:center;gap:8px;
-    font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;
-    background:var(--accent-soft);color:var(--accent);padding:5px 11px;border-radius:2px;font-weight:600;
-  }
-  .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);}
-  .campaign h3{font-family:Newsreader,Georgia,serif;font-weight:600;font-size:1.55rem;margin:16px 0 10px;letter-spacing:-.008em;}
-  .campaign p.desc{margin:0 0 22px;color:var(--ink-2);max-width:60ch;}
-  .figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin-bottom:24px;}
-  .figs > div{background:var(--surface-2);padding:16px 18px;}
-  .figs dt{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3);margin:0 0 7px;}
-  .figs dd{margin:0;font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;font-size:22px;font-weight:500;letter-spacing:-.02em;}
-  .cta{
-    display:inline-block;font-weight:600;font-size:16px;
-    background:var(--accent);color:var(--accent-ink);
-    border:1px solid var(--accent);padding:12px 26px;border-radius:3px;text-decoration:none;
-    transition:background .15s ease;
-  }
-  .cta:hover{background:var(--accent-hover);border-color:var(--accent-hover);color:var(--accent-ink);}
-
-  .steps{list-style:none;margin:0;padding:0;counter-reset:s;display:flex;flex-direction:column;gap:1px;background:var(--rule);border:1px solid var(--rule);}
-  .steps li{background:var(--surface);padding:22px 26px;display:flex;gap:20px;align-items:flex-start;}
-  .steps .n{counter-increment:s;font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;font-size:13px;font-weight:600;color:var(--accent);flex:0 0 auto;padding-top:3px;}
-  .steps .n::before{content:counter(s,decimal-leading-zero);}
-  .steps.plain .n::before{content:"\2014";}
-  .steps h3{font-family:"Public Sans",sans-serif;font-size:17px;font-weight:700;margin:0 0 6px;}
-  .steps p{margin:0;color:var(--ink-2);font-size:16px;line-height:1.6;max-width:62ch;}
-
-  .efforts{display:flex;flex-direction:column;gap:14px;}
-  .effort{background:var(--surface);border:1px solid var(--rule);padding:24px 26px;}
-  .effort-head{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:baseline;justify-content:space-between;}
-  .effort h3{font-family:Newsreader,Georgia,serif;font-weight:600;font-size:1.28rem;margin:0;letter-spacing:-.005em;}
-  .when{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--ink-3);white-space:nowrap;}
-  .effort p{margin:12px 0 0;color:var(--ink-2);font-size:16px;max-width:64ch;}
-  .effort .tag{
-    display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.1em;
-    text-transform:uppercase;color:var(--ink-3);border:1px solid var(--rule-strong);
-    padding:3px 8px;border-radius:2px;margin-top:14px;
-  }
-  .effort-figs{
-    display:flex;flex-wrap:wrap;gap:0;margin-top:18px;
-    border:1px solid var(--rule);background:var(--rule);
-  }
-  .effort-figs div{background:var(--surface-2);padding:12px 16px;flex:1 1 auto;min-width:112px;margin:0 1px 0 0;}
-  .effort-figs div:last-child{margin-right:0;}
-  .effort-figs dt{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin:0 0 5px;}
-  .effort-figs dd{margin:0;font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;font-size:19px;font-weight:500;}
-  .needs{
-    margin-top:14px;font-size:14px;font-family:"IBM Plex Mono",monospace;line-height:1.55;
-    background:var(--notice);border:1px solid var(--notice-rule);color:var(--notice-ink);
-    padding:9px 13px;border-radius:3px;
-  }
-
-  .disclosure{border-left:3px solid var(--accent);background:var(--surface-2);padding:24px 28px;}
-  .disclosure p{margin:0 0 14px;font-size:16px;line-height:1.62;}
-  .disclosure p:last-child{margin-bottom:0;}
-
-  footer{margin-top:76px;padding-top:26px;border-top:1px solid var(--rule);color:var(--ink-3);font-size:14.5px;}
-  footer p{margin:0 0 6px;}
-
-  @media (max-width:600px){
-    body{font-size:16.5px;}
-    .hero-inner{padding:40px 20px 32px;}
-    .wrap{padding:0 20px 72px;}
-    .campaign{padding:24px 22px;}
-    .steps li{flex-direction:column;gap:8px;}
-  }
-</style>
-
-<a class="skip" href="#now">Skip to the current campaign</a>
+<a class="skip" href="#what">Skip to what we do</a>
 
 <div class="preview">
-  <p><strong>Draft for review.</strong> Already known, no need to report: the logo isn't in yet, the yellow note further down is a reminder to me, and nothing on this site can take payment. <strong>Worth reporting:</strong> anything that looks broken or cut off, and anything that makes this feel less than trustworthy.</p>
+  <p><strong>Draft for review.</strong> Already known, no need to report: the logo isn't in yet and nothing on this site can take payment. <strong>Worth reporting:</strong> anything that looks broken or cut off, and anything that makes this feel less than trustworthy.</p>
 </div>
 
 <div class="topbar">
@@ -174,9 +26,9 @@
     </div>
     <nav aria-label="Main">
       <ul>
-        <li><a href="#now" aria-current="true">Running now</a></li>
+        <li><a href="#what" aria-current="true">What we do</a></li>
         <li><a href="#how">How it works</a></li>
-        <li><a href="#efforts">What we've done</a></li>
+        <li><a href="#honest">About</a></li>
       </ul>
     </nav>
   </div>
@@ -184,170 +36,117 @@
 
 <header class="hero">
   <div class="hero-inner">
-    <p class="eyebrow">Everett, Washington</p>
-    <h1>Fresh socks are basically gold.</h1>
-    <p class="origin">At a Seattle bus stop, a man next to me wrung out his socks, put them in his bag, and pulled on a dry pair. We said nothing. But I learned something that day, and it stayed with me.</p>
-    <p class="origin">That winter I put together <strong>24 backpacks</strong> for people living outside in Everett — practical warmth, hygiene, and a few things that just make a day easier. Bought one item at a time, with everyone's help, and handed out in a church parking lot in November.</p>
-    <p class="origin">This winter it's <strong>96</strong>.</p>
-    <p class="origin-note">Roots Worth Tending &mdash; community support that builds autonomy. We invest in roots &mdash; capacity, dignity &mdash; until life's hard moments don't block people from helping.</p>
+    <p class="eyebrow">Snohomish County, Washington</p>
+    <h1>Community support that builds autonomy.</h1>
+    <p class="lede">We invest in roots &mdash; capacity, dignity &mdash; until life's hard moments don't block people from helping.</p>
+    <p class="lede">In practice that means supply drives and benefit events, run by volunteers, with every cost written down where anyone can check it.</p>
   </div>
 </header>
 
 <div class="wrap">
 
-  <section id="now" aria-labelledby="now-h">
-    <h2 id="now-h">Running now</h2>
-    <p class="sec-note">One campaign is open at a time. When it closes, it moves to the record below and the next one opens.</p>
-    <div class="campaign">
-      <span class="status-chip"><span class="dot" aria-hidden="true"></span>Open for funding</span>
-      <h3>Winter bags, 2026</h3>
-      <p class="desc">Ninety-six identical bags of cold-weather and foot-care supplies, assembled and handed out before the wet months. Bought in bulk cases, funded one item at a time.</p>
-      <dl class="figs">
-        <div><dt>Bags</dt><dd class="num">96</dd></div>
-        <div><dt>Items listed</dt><dd class="num">7</dd></div>
-        <div><dt>Raised</dt><dd class="num">$0.00</dd></div>
-      </dl>
-      <a class="cta" href="winter-2026.html">See the manifest and fund an item</a>
-    </div>
-  </section>
-
-  <section id="dignity" aria-labelledby="dignity-h">
-    <h2 id="dignity-h">Built for dignity first</h2>
-    <p class="sec-note">Every item has to earn its place twice — once for being useful, and once for how it lands when someone opens the bag.</p>
-    <ol class="steps plain">
-      <li>
-        <span class="n" aria-hidden="true"></span>
-        <div>
-          <h3>The wipes are unscented</h3>
-          <p>All of them. A bag shouldn't announce itself across a room, and nobody should be identifiable by what they were given.</p>
-        </div>
-      </li>
-      <li>
-        <span class="n" aria-hidden="true"></span>
-        <div>
-          <h3>A discreet zip bag and a disposal bag</h3>
-          <p>Managing a body outdoors shouldn't require an audience. These two cost almost nothing and they change what a day feels like.</p>
-        </div>
-      </li>
-      <li>
-        <span class="n" aria-hidden="true"></span>
-        <div>
-          <h3>Menstrual supplies past the token three pads</h3>
-          <p>The first list carried three. It got upgraded mid-drive to a full-cycle set, because half a solution isn't one.</p>
-        </div>
-      </li>
-      <li>
-        <span class="n" aria-hidden="true"></span>
-        <div>
-          <h3>A pen, a notepad, and a printed resource sheet</h3>
-          <p>Supplies for a person with plans, appointments and phone numbers to keep — not just a body to keep warm.</p>
-        </div>
-      </li>
-      <li>
-        <span class="n" aria-hidden="true"></span>
-        <div>
-          <h3>Everything is new</h3>
-          <p>Bought in sealed cases, nothing handed down, nothing anyone else finished with first.</p>
-        </div>
-      </li>
-    </ol>
-    <p class="sec-note" style="margin-top:26px;margin-bottom:0;">The point was never the socks. It's that somebody opens a bag and can tell it was packed by a person who thought about them — which is not a common experience when you're living outside.</p>
-  </section>
-
-  <section id="how" aria-labelledby="how-h">
-    <h2 id="how-h">How it works</h2>
-    <p class="sec-note">Last winter the promise was that I'd post screenshots of every purchase and a running total. This page is that promise, built properly — the numbers update themselves and nobody has to take my word for it.</p>
-    <ol class="steps">
-      <li>
-        <span class="n" aria-hidden="true"></span>
-        <div>
-          <h3>Every item is priced in public before it's asked for</h3>
-          <p>Find the supplier, check the case is actually in stock and purchasable, publish the case size, the unit price and the link. The arithmetic sits on the page so you can redo it.</p>
-        </div>
-      </li>
-      <li>
-        <span class="n" aria-hidden="true"></span>
-        <div>
-          <h3>People fund the item they care about, in any amount</h3>
-          <p>Items are bought as whole cases, so an item is either funded or it isn't. You can cover the whole thing or five dollars of it. Progress is live — your contribution shows up in the number the moment it lands.</p>
-        </div>
-      </li>
-      <li>
-        <span class="n" aria-hidden="true"></span>
-        <div>
-          <h3>Funded items get bought, in list order, and closed out</h3>
-          <p>Once an item reaches its price it stops taking money and gets ordered. The list is worked from the top down. If a contribution overshoots the last few dollars of an item, it moves to the next unfunded item — or you can ask for it back. You choose which at checkout.</p>
-        </div>
-      </li>
-      <li>
-        <span class="n" aria-hidden="true"></span>
-        <div>
-          <h3>The finished campaign stays up</h3>
-          <p>Closed campaigns keep their page, with what was bought and what it cost. The record is the point — it's how you tell whether the last one actually happened.</p>
-        </div>
-      </li>
-    </ol>
-  </section>
-
-  <section id="efforts" aria-labelledby="efforts-h">
-    <h2 id="efforts-h">What we've done</h2>
-    <p class="sec-note">Two winters of supply drives, and a benefit auction along the way.</p>
+  <section id="what" aria-labelledby="what-h">
+    <h2 id="what-h">What we do</h2>
+    <p class="sec-note">One thing is open for funding at a time. Everything finished keeps its page, with what was bought and what it cost.</p>
     <div class="efforts">
 
       <article class="effort">
+        <span class="status-chip"><span class="dot" aria-hidden="true"></span>Open for funding</span>
         <div class="effort-head">
-          <h3>The Backpack Project</h3>
-          <span class="when">Winter 2025 &middot; delivered</span>
+          <h3><a href="winter-2026.html">Winter bags 2026</a></h3>
+          <span class="when">Open now</span>
         </div>
-        <p>The first drive. A forty-five item list, one item per bag unless noted — two pairs of water-resistant socks, a rain poncho, a beanie, a mylar blanket, hygiene, first aid, food, a flashlight, a notepad and a printed local resource sheet. The target was to have everything ordered by November 10th. It was ordered inside a week.</p>
-        <p>The finished bags were handed out on November 14th in the back parking lot of Vision Church Full Circle Ministry on California Street.</p>
+        <p>Ninety-six identical bags of cold-weather and foot-care supplies for people living outside in Everett, bought in bulk cases and funded one item at a time. Four times the size of the first run.</p>
+        <dl class="effort-figs">
+          <div><dt>Bags</dt><dd class="num">96</dd></div>
+          <div><dt>Items listed</dt><dd class="num">7</dd></div>
+          <div><dt>Raised</dt><dd class="num">$0.00</dd></div>
+        </dl>
+        <a class="go" href="winter-2026.html">See the manifest and fund an item</a>
+      </article>
+
+      <article class="effort">
+        <span class="status-chip chip-done">Delivered</span>
+        <div class="effort-head">
+          <h3><a href="backpack-2025.html">The Backpack Project</a></h3>
+          <span class="when">Winter 2025</span>
+        </div>
+        <p>The first drive. Twenty-four backpacks, forty-five items in each, handed out in a church parking lot in November. Everything was ordered inside a week.</p>
         <dl class="effort-figs">
           <div><dt>Backpacks</dt><dd class="num">24</dd></div>
           <div><dt>Items per bag</dt><dd class="num">45</dd></div>
           <div><dt>Ordering time</dt><dd class="num">&lt;1 wk</dd></div>
         </dl>
-        <p class="needs">Needs from you: total raised, and confirmation the count was 24 — I read that off your line about extras beyond 24 rolling into the next run.</p>
+        <a class="go go-quiet" href="backpack-2025.html">Read what happened</a>
       </article>
 
       <article class="effort">
+        <span class="status-chip chip-done">Completed</span>
         <div class="effort-head">
-          <h3>Local Bids &amp; Brews</h3>
-          <span class="when">June 2026 &middot; completed</span>
+          <h3><a href="bids-and-brews.html">Local Bids &amp; Brews</a></h3>
+          <span class="when">June 2026</span>
         </div>
-        <p>A benefit auction at Haywire Brewing Co., raising money for Domestic Violence Services of Snohomish County. Lots were solicited from local businesses and makers. A separate effort from the supply drives — the same idea about getting a town involved in itself.</p>
+        <p>A silent auction at a local brewery, raising money for Domestic Violence Services of Snohomish County. A benefit event rather than a supply drive &mdash; same idea about getting a town involved in itself.</p>
         <dl class="effort-figs">
           <div><dt>Raised</dt><dd class="num">$2,515</dd></div>
-          <div><dt>Venue</dt><dd class="num">Haywire</dd></div>
-          <div><dt>Beneficiary</dt><dd class="num">DV Services</dd></div>
+          <div><dt>Went to</dt><dd class="num">DV Services</dd></div>
         </dl>
-      </article>
-
-      <article class="effort">
-        <div class="effort-head">
-          <h3>Winter bags</h3>
-          <span class="when">2026 &middot; open</span>
-        </div>
-        <p>Ninety-six bags — four times the first run. Same method, published further: every item sourced, priced and posted before it's funded, with progress anyone can watch.</p>
+        <a class="go go-quiet" href="bids-and-brews.html">Read what happened</a>
       </article>
 
     </div>
   </section>
 
-  <section aria-labelledby="honest-h">
+  <section id="how" aria-labelledby="how-h">
+    <h2 id="how-h">How it works</h2>
+    <p class="sec-note">The whole method is that nothing is vague. If you can't check it, we haven't finished writing it down.</p>
+    <ol class="steps">
+      <li>
+        <span class="n" aria-hidden="true"></span>
+        <div>
+          <h3>Everything is priced in public before it's asked for</h3>
+          <p>We find the supplier, check the goods are actually in stock and purchasable, and publish the case size, the unit price and the link. The arithmetic sits on the page so you can redo it.</p>
+        </div>
+      </li>
+      <li>
+        <span class="n" aria-hidden="true"></span>
+        <div>
+          <h3>People fund the specific thing they care about</h3>
+          <p>Supplies are bought as whole cases, so an item is either funded or it isn't. You can cover the whole thing or five dollars of it, and progress is live &mdash; your contribution shows up in the number the moment it lands.</p>
+        </div>
+      </li>
+      <li>
+        <span class="n" aria-hidden="true"></span>
+        <div>
+          <h3>Funded things get bought, in list order, and closed out</h3>
+          <p>Once an item reaches its price it stops taking money and gets ordered. The list is worked from the top down. If a contribution overshoots the last few dollars, it moves to the next unfunded item &mdash; or you can ask for it back. You choose which at checkout.</p>
+        </div>
+      </li>
+      <li>
+        <span class="n" aria-hidden="true"></span>
+        <div>
+          <h3>Finished work stays up</h3>
+          <p>Closed drives and events keep their pages, with what was bought and what it cost. The record is the point &mdash; it's how you tell whether the last one actually happened.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section id="honest" aria-labelledby="honest-h">
     <h2 id="honest-h">Things worth knowing</h2>
     <div class="disclosure">
       <p><strong>Roots Worth Tending is not a registered 501(c)(3).</strong> It's a small volunteer effort, not an incorporated charity. Contributions are <strong>not tax-deductible</strong>, and you shouldn't claim them as such.</p>
-      <p>Nobody here is paid. There's no office and no overhead — a contribution buys the thing it was given for, at the price shown, from the supplier named.</p>
+      <p>Nobody here is paid. There's no office and no overhead &mdash; a contribution buys the thing it was given for, at the price shown, from the supplier named.</p>
       <p>That's also why the prices are all linked. You don't have to trust the arithmetic; you can check it in about thirty seconds, and if a supplier's price has moved since a page was built, the link will show you that too.</p>
+      <p>If something here doesn't add up, say so and it gets fixed.</p>
     </div>
   </section>
 
   <footer>
     <p>Roots Worth Tending &middot; Everett, Snohomish County, Washington</p>
-    <p>partnership@rootsworthtending.com &middot; Payments handled by Stripe</p>
+    <p>partnership@rootsworthtending.com</p>
   </footer>
 
 </div>
-
 </body>
 </html>
