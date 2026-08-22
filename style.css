@@ -42,9 +42,12 @@ a:hover{color:var(--accent-hover);}
 .topbar{border-bottom:1px solid var(--rule);background:var(--surface-2);}
 .topbar-inner{max-width:940px;margin:0 auto;padding:14px 24px;display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center;justify-content:space-between;}
 .brandline{display:flex;align-items:center;gap:12px;}
-.logoslot{width:48px;height:48px;flex:0 0 auto;border:0;border-radius:50%;overflow:hidden;
-  background:#F7EFE7 url("logo.png") no-repeat center/40px 40px;
-  font-size:0;color:transparent;}
+.logoslot{width:46px;height:46px;flex:0 0 auto;border:0;font-size:0;color:transparent;
+  background:url("logo.png") no-repeat center/contain;}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]) .logoslot{background-image:url("logo-dark.png");}
+}
+:root[data-theme="dark"] .logoslot{background-image:url("logo-dark.png");}
 .brandname{font-family:Newsreader,Georgia,serif;font-size:1.12rem;font-weight:600;letter-spacing:-.005em;text-decoration:none;color:var(--ink);}
 .brandname:hover{color:var(--accent);}
 nav ul{list-style:none;display:flex;flex-wrap:wrap;gap:22px;margin:0;padding:0;font-size:15px;}
