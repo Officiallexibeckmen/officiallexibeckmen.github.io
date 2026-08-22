@@ -127,6 +127,17 @@ button.give{font-family:"Public Sans",sans-serif;font-size:15.5px;font-weight:60
   border:1px solid var(--accent);padding:11px 22px;border-radius:3px;cursor:pointer;transition:background .15s ease;}
 button.give:hover{background:var(--accent-hover);border-color:var(--accent-hover);}
 .any{font-size:14.5px;color:var(--ink-2);}
+.amtwrap{display:inline-flex;align-items:center;border:1px solid var(--rule-strong);border-radius:3px;background:var(--surface);overflow:hidden;}
+.amtsign{padding:0 2px 0 12px;font-family:"IBM Plex Mono",monospace;font-size:15.5px;color:var(--ink-2);}
+input.amount{width:92px;border:0;background:transparent;color:var(--ink);padding:11px 12px 11px 4px;
+  font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;font-size:15.5px;}
+input.amount:focus{outline:none;}
+.amtwrap:focus-within{border-color:var(--accent);box-shadow:0 0 0 2.5px var(--accent-soft);}
+input.amount:disabled{color:var(--ink-3);}
+.amtwrap:has(input:disabled){opacity:.55;}
+button.give:disabled{background:var(--surface-2);color:var(--ink-3);border-color:var(--rule-strong);cursor:default;}
+button.give:disabled:hover{background:var(--surface-2);border-color:var(--rule-strong);}
+article.item[data-closed] .track{opacity:.75;}
 .status{margin-top:12px;font-size:14.5px;color:var(--notice-ink);background:var(--notice);border:1px solid var(--notice-rule);padding:9px 14px;border-radius:3px;}
 .status:empty{display:none;}
 
