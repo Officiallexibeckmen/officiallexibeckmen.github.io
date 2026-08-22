@@ -92,7 +92,7 @@
 
   <section aria-labelledby="manifest-h" id="manifest">
     <h2 id="manifest-h">The manifest</h2>
-    <p class="sec-note">Each item is one bulk order, bought whole. Contribute any amount toward the one you care about &mdash; nothing is held back until an item reaches its full price, and nothing is bought until it does.</p>
+    <p class="sec-note">Each item is one bulk order, bought whole. Put an amount beside anything you want to help with &mdash; as many as you like &mdash; and pay for all of them at once. Nothing is held back until an item reaches its full price, and nothing is bought until it does.</p>
     <div class="manifest">
 
       <article class="item" data-slug="backpacks">
@@ -108,10 +108,7 @@
             <span class="pct">0% funded</span><span class="rest">$388.26 still needed</span>
           </div>
         </div>
-        <div class="actions">
-          <button class="give" type="button" data-item="96 backpacks">Contribute to the backpacks</button>
-          <span class="any">Any amount</span>
-        </div>
+        <div class="actions"><span class="any">Any amount</span></div>
         <p class="status" role="status"></p>
       </article>
 
@@ -128,10 +125,7 @@
             <span class="pct">0% funded</span><span class="rest">$422.16 still needed</span>
           </div>
         </div>
-        <div class="actions">
-          <button class="give" type="button" data-item="300 pairs thermal boot socks">Contribute to the socks</button>
-          <span class="any">Any amount</span>
-        </div>
+        <div class="actions"><span class="any">Any amount</span></div>
         <p class="status" role="status"></p>
       </article>
 
@@ -148,10 +142,7 @@
             <span class="pct">0% funded</span><span class="rest">$516.96 still needed</span>
           </div>
         </div>
-        <div class="actions">
-          <button class="give" type="button" data-item="96 packs moleskin blister pads">Contribute to the blister pads</button>
-          <span class="any">Any amount</span>
-        </div>
+        <div class="actions"><span class="any">Any amount</span></div>
         <p class="status" role="status"></p>
       </article>
 
@@ -168,10 +159,7 @@
             <span class="pct">0% funded</span><span class="rest">$296.84 still needed</span>
           </div>
         </div>
-        <div class="actions">
-          <button class="give" type="button" data-item="192 tubes antifungal cream">Contribute to the antifungal cream</button>
-          <span class="any">Any amount</span>
-        </div>
+        <div class="actions"><span class="any">Any amount</span></div>
         <p class="status" role="status"></p>
       </article>
 
@@ -188,10 +176,7 @@
             <span class="pct">0% funded</span><span class="rest">$168.32 still needed</span>
           </div>
         </div>
-        <div class="actions">
-          <button class="give" type="button" data-item="96 tubes zinc oxide barrier cream">Contribute to the barrier cream</button>
-          <span class="any">Any amount</span>
-        </div>
+        <div class="actions"><span class="any">Any amount</span></div>
         <p class="status" role="status"></p>
       </article>
 
@@ -208,10 +193,7 @@
             <span class="pct">0% funded</span><span class="rest">$16.07 still needed</span>
           </div>
         </div>
-        <div class="actions">
-          <button class="give" type="button" data-item="100 toothbrushes">Contribute to the toothbrushes</button>
-          <span class="any">Any amount</span>
-        </div>
+        <div class="actions"><span class="any">Any amount</span></div>
         <p class="status" role="status"></p>
       </article>
 
@@ -228,12 +210,23 @@
             <span class="pct">0% funded</span><span class="rest">$10.53 still needed</span>
           </div>
         </div>
-        <div class="actions">
-          <button class="give" type="button" data-item="100 toothbrush head cases">Contribute to the head cases</button>
-          <span class="any">Any amount</span>
-        </div>
+        <div class="actions"><span class="any">Any amount</span></div>
         <p class="status" role="status"></p>
       </article>
+    </div>
+
+    <div class="basket" id="basket" hidden>
+      <div class="basket-inner">
+        <p class="basket-sum" aria-live="polite">
+          <span class="basket-count">Nothing chosen yet</span>
+          <span class="basket-total num">$0.00</span>
+        </p>
+        <div class="basket-acts">
+          <button class="give" type="button" id="basket-clear">Clear</button>
+          <button class="give go-pay" type="button" id="basket-pay">Contribute</button>
+        </div>
+      </div>
+      <p class="status basket-status" role="status"></p>
     </div>
   </section>
 
